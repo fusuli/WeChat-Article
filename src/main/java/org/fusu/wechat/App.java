@@ -1,13 +1,13 @@
 package org.fusu.wechat;
 
+import org.springframework.boot.SpringApplication;
+
 /**
- * Hello world!
+ * @author fusuli
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+public class App {
+	public static void main(String[] args) {
+		SpringApplication.run(App.class, args);
+	}
 }
