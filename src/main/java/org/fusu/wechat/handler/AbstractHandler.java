@@ -9,6 +9,6 @@ import me.chanjar.weixin.mp.api.WxMpMessageHandler;
  * @author fusuli
  */
 public abstract class AbstractHandler implements WxMpMessageHandler {
-    protected Logger logger = LoggerFactory.getLogger(getClass());
-    
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+
 }

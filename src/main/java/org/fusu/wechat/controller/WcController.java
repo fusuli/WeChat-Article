@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @author fusuli
  */
 @RestController
-@RequestMapping("/wechat/portal")
+@RequestMapping("/wechat/article")
 public class WcController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
