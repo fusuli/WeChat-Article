@@ -7,6 +7,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
+import org.fusu.wechat.biz.WxMpUserBiz;
 import org.fusu.wechat.builder.TextBuilder;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,24 @@ public class SubscribeHandler extends AbstractHandler {
 
 		if (userWxInfo != null) {
 			// TODO 可以添加关注用户到本地
+			//System.out.println(userWxInfo.getCity());
+			//System.out.println(userWxInfo.getProvince());
+			//System.out.println(userWxInfo.getCountry());
+			System.out.println(userWxInfo.getHeadImgUrl());
+			//System.out.println(userWxInfo.getSubscribeTime());
+			//System.out.println(userWxInfo.getLanguage());
+			//System.out.println(userWxInfo.getNickname());
+			
+			//System.out.println(userWxInfo.getOpenId());
+			
+			System.out.println(userWxInfo.getRemark());
+			System.out.println(userWxInfo.getSexId());
+			//System.out.println(userWxInfo.getSex());
+			System.out.println(userWxInfo.getUnionId());
+			System.out.println(userWxInfo.getTagIds());
 
+			int rs = WxMpUserBiz.insertItem(userWxInfo);
+			System.out.println(rs);
 		}
 
 		WxMpXmlOutMessage responseResult = null;

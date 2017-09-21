@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fusu.wechat.mapper.WxMpUserMapper">
+	<insert id="insertWxMpUser" parameterType="WxMpUser">
+		INSERT INTO WxMpUser
+		(subscribe,openId,nickname,sex,language,city,province,country,headImgUrl,subscribeTime,unionId,sexId,remark,
+		groupId)
+		VALUES
+		(#{subscribe},#{openId},#{nickname},#{sex},#{language},#{city},#{province},#{country},#{headImgUrl},#{subscribeTime},#{unionId},#{sexId},#{remark},#{groupId})
+	</insert>
+</mapper>
