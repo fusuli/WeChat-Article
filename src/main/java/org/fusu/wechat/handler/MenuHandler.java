@@ -28,7 +28,7 @@ public class MenuHandler extends AbstractHandler {
 			return null;
 		}
 
-		return WxMpXmlOutMessage.TEXT().content(msg).fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
+		return WxMpXmlOutMessage.TEXT().content("nihaoA").fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
 				.build();
 	}
 

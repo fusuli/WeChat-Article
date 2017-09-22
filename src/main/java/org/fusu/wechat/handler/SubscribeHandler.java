@@ -30,24 +30,14 @@ public class SubscribeHandler extends AbstractHandler {
 
 		if (userWxInfo != null) {
 			// TODO 可以添加关注用户到本地
-			//System.out.println(userWxInfo.getCity());
-			//System.out.println(userWxInfo.getProvince());
-			//System.out.println(userWxInfo.getCountry());
-			System.out.println(userWxInfo.getHeadImgUrl());
-			//System.out.println(userWxInfo.getSubscribeTime());
-			//System.out.println(userWxInfo.getLanguage());
-			//System.out.println(userWxInfo.getNickname());
-			
-			//System.out.println(userWxInfo.getOpenId());
-			
-			System.out.println(userWxInfo.getRemark());
-			System.out.println(userWxInfo.getSexId());
-			//System.out.println(userWxInfo.getSex());
-			System.out.println(userWxInfo.getUnionId());
-			System.out.println(userWxInfo.getTagIds());
-
-			int rs = WxMpUserBiz.insertItem(userWxInfo);
-			System.out.println(rs);
+			int rs1 = WxMpUserBiz.queryWxMpUserByOpenId(userWxInfo);
+			if (rs1 > 0) {
+				int rs = WxMpUserBiz.updateWxMpUser(userWxInfo);
+				System.out.println("二次关注成功：" + rs);
+			} else {
+				int rs = WxMpUserBiz.insertWxMpUser(userWxInfo);
+				System.out.println("添加成功：" + rs);
+			}
 		}
 
 		WxMpXmlOutMessage responseResult = null;
