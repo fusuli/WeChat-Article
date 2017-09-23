@@ -46,11 +46,11 @@ public class WxMpUserBiz {
 	 * @return
 	 */
 	public static int queryWxMpUserByOpenId(WxMpUser wxMpUser) {
-		int i = wxMpUserMapper.queryWxMpUserByOpenId(wxMpUser);
-		if (i > 0) {
-			session.commit();
+		WxMpUser user = wxMpUserMapper.queryWxMpUserByOpenId(wxMpUser);
+		if (user != null) {
+			return 1;
 		}
-		return i;
+		return 0;
 	}
 	
 	/**

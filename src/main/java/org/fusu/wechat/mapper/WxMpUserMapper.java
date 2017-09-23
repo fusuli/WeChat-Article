@@ -16,7 +16,7 @@ public interface WxMpUserMapper {
 	public int cancelAttention(WxMpUser wxMpUser);
 
 	// 查询用户是否存在
-	public int queryWxMpUserByOpenId(WxMpUser wxMpUser);
+	public WxMpUser queryWxMpUserByOpenId(WxMpUser wxMpUser);
 
 	// 二次关注，更新用户信息
 	public int updateWxMpUser(WxMpUser wxMpUser);

@@ -25,9 +25,9 @@ public class UnsubscribeHandler extends AbstractHandler {
 		String openId = wxMessage.getFromUser();
 		this.logger.info("取消关注用户 OPENID: " + openId);
 		// TODO 可以更新本地数据库为取消关注状态
-		WxMpUser wxMpUser = wxMpService.getUserService().userInfo(wxMessage.getFromUser(), null);
-		//更改关注状态
+		WxMpUser wxMpUser = new WxMpUser();
 		wxMpUser.setSubscribe(false);
+		wxMpUser.setOpenId(openId);
 		int rs = WxMpUserBiz.cancelAttention(wxMpUser);
 		System.out.println("取消关注成功："+rs);
 		return null;
