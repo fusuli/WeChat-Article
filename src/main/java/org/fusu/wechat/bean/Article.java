@@ -1,21 +1,26 @@
 package org.fusu.wechat.bean;
 
+/**
+ * 
+ * @author fusuli
+ *
+ */
 public class Article {
-private int articleid;
-private String title;
-private String content;
-private String pic_url;
-private String url;
-private int pageview;
-private int update_time;
+	private int articleid;
+	private String title;
+	private String content;
+	private String pic_url;
+	private String url;
+	private int pageview;
+	private int update_time;
 	private int host;
 
-	public int getArticle() {
+	public int getArticleid() {
 		return articleid;
 	}
 
-	public void setArticle(int article) {
-		this.articleid = article;
+	public void setArticleid(int articleid) {
+		this.articleid = articleid;
 	}
 
 	public String getTitle() {

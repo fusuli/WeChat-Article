@@ -1,11 +1,12 @@
 package org.fusu.wechat.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.fusu.wechat.bean.Article;
-import org.fusu.wechat.mapper.ArticleMapper;
-import org.fusu.wechat.utils.SqlSessionFactoryUtil;
+import org.fusu.wechat.mapper.impl.ArticleMapperImpl;
+
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutNewsMessage;
 
 /**
  * 
@@ -13,24 +14,66 @@ import org.fusu.wechat.utils.SqlSessionFactoryUtil;
  *
  */
 public class ArticleBiz {
-	static SqlSession session = SqlSessionFactoryUtil.getSqlSessionFactory().openSession();
-	static ArticleMapper articleMapper = session.getMapper(ArticleMapper.class);
 
 	/**
-	 * 根据hot查找最热5篇文章
-	 *
-	 * @return
-	 */
-	public static List<Article> queryArticleByHot() {
-		return articleMapper.queryArticleByHot();
-	}
-
-	/**
-	 * 查找最新5篇文章
+	 * 查询最热5篇文章
 	 * 
 	 * @return
 	 */
-	public static List<Article> queryArticleByNew() {
-		return articleMapper.queryArticleByNew();
+	public static List<WxMpXmlOutNewsMessage.Item> hotArticle() {
+		List<WxMpXmlOutNewsMessage.Item> articles = new ArrayList<>();
+		List<Article> alist = ArticleMapperImpl.queryArticleByHot();
+		for (int i = 0; i < alist.size(); i++) {
+			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
+			item.setTitle(alist.get(i).getTitle());
+			item.setPicUrl(alist.get(i).getPic_url());
+			item.setUrl(alist.get(i).getUrl());
+			articles.add(item);
+		}
+		return articles;
+	}
+
+	/**
+	 * 查询最新5篇文章
+	 * 
+	 * @return
+	 */
+	public static List<WxMpXmlOutNewsMessage.Item> newArticle() {
+		List<WxMpXmlOutNewsMessage.Item> articles = new ArrayList<>();
+		List<Article> alist = ArticleMapperImpl.queryArticleByNew();
+		for (int i = 0; i < alist.size(); i++) {
+			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
+			item.setTitle(alist.get(i).getTitle());
+			item.setPicUrl(alist.get(i).getPic_url());
+			item.setUrl(alist.get(i).getUrl());
+			articles.add(item);
+		}
+		return articles;
+	}
+	
+	/**
+	 * 根据用户输入的字段模糊查询
+	 * @param title
+	 * @return
+	 */
+	public static List<WxMpXmlOutNewsMessage.Item> likeArticle(String title){
+		List<WxMpXmlOutNewsMessage.Item> articles = new ArrayList<>();
+		List<Article> alist = ArticleMapperImpl.queryArticleByTitle(title);
+		for (int i = 0; i < alist.size(); i++) {
+			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
+			item.setTitle(alist.get(i).getTitle());
+			item.setPicUrl(alist.get(i).getPic_url());
+			item.setUrl(alist.get(i).getUrl());
+			articles.add(item);
+		}
+		return articles;
+	}
+	/**
+	 * 根据articleid查询文章
+	 * @param articleid
+	 * @return
+	 */
+	public static Article queryArticleByArticleid(int articleid){
+		return ArticleMapperImpl.queryArticleByArticleid(articleid);
 	}
 }

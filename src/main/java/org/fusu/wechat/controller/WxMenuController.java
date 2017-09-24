@@ -55,7 +55,7 @@ public class WxMenuController implements WxMpMenuService {
 		button2.setType(WxConsts.BUTTON_CLICK);
 		button2.setName("最新文章");
 		button2.setKey("NEW");
-	
+
 		menu.getButtons().add(button1);
 		menu.getButtons().add(button2);
 

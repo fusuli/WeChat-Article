@@ -3,6 +3,7 @@ package org.fusu.wechat.handler;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fusu.wechat.biz.ArticleBiz;
 import org.fusu.wechat.builder.TextBuilder;
 import org.fusu.wechat.utils.JsonUtils;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,13 @@ public class MsgHandler extends AbstractHandler {
 
 		if (!wxMessage.getMsgType().equals(WxConsts.XML_MSG_EVENT)) {
 			// TODO 可以选择将消息保存到本地
-
+			if (ArticleBiz.likeArticle(wxMessage.getContent()).size() <= 0) {
+				String msString = "对不起！没有您需要的关于" + "“" + wxMessage.getContent() + "”" + "的文章";
+				return WxMpXmlOutMessage.TEXT().content(msString).fromUser(wxMessage.getToUser())
+						.toUser(wxMessage.getFromUser()).build();
+			}
+			return WxMpXmlOutMessage.NEWS().fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
+					.articles(ArticleBiz.likeArticle(wxMessage.getContent())).build();
 		}
 
 		// 当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服
@@ -44,7 +51,6 @@ public class MsgHandler extends AbstractHandler {
 
 		// TODO 组装回复消息
 		String content = "收到信息内容：" + JsonUtils.toJson(wxMessage);
-		
 		return new TextBuilder().build(content, wxMessage, weixinService);
 
 	}

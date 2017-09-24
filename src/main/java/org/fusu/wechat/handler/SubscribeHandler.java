@@ -30,14 +30,7 @@ public class SubscribeHandler extends AbstractHandler {
 
 		if (userWxInfo != null) {
 			// TODO 可以添加关注用户到本地
-			int rs1 = WxMpUserBiz.queryWxMpUserByOpenId(userWxInfo);
-			if (rs1 > 0) {
-				int rs = WxMpUserBiz.updateWxMpUser(userWxInfo);
-				System.out.println("二次关注成功：" + rs);
-			} else {
-				int rs = WxMpUserBiz.insertWxMpUser(userWxInfo);
-				System.out.println("添加成功：" + rs);
-			}
+			WxMpUserBiz.wxMpUserInfor(userWxInfo);
 		}
 
 		WxMpXmlOutMessage responseResult = null;
@@ -52,7 +45,7 @@ public class SubscribeHandler extends AbstractHandler {
 		}
 
 		try {
-			return new TextBuilder().build("感谢关注", wxMessage, weixinService);
+			return new TextBuilder().build("感谢关注！！！您可以点击下方菜单或输入所需要的文章标题来阅读美文。祝您阅读愉快！！！", wxMessage, weixinService);
 		} catch (Exception e) {
 			this.logger.error(e.getMessage(), e);
 		}

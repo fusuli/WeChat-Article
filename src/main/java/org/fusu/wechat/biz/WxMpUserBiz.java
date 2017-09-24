@@ -1,68 +1,43 @@
 package org.fusu.wechat.biz;
 
-import org.apache.ibatis.session.SqlSession;
-import org.fusu.wechat.mapper.WxMpUserMapper;
-import org.fusu.wechat.utils.SqlSessionFactoryUtil;
+import org.fusu.wechat.mapper.impl.WxMpUserMapperImpl;
 
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
+/**
+ * 
+ * @author fusuli
+ *
+ */
 public class WxMpUserBiz {
-	static SqlSession session = SqlSessionFactoryUtil.getSqlSessionFactory().openSession();
-	static WxMpUserMapper wxMpUserMapper = session.getMapper(WxMpUserMapper.class);
 
 	/**
-	 * 添加用户信息
+	 * 判断用户是否关注 。如果已关注，根据openId修改原有数据； 从未关注，直接添加用户信息
 	 * 
 	 * @param wxMpUser
-	 * @return
 	 */
-	public static int insertWxMpUser(WxMpUser wxMpUser) {
-		int i = wxMpUserMapper.insertWxMpUser(wxMpUser);
-		if (i > 0) {
-			session.commit();
+	public static void wxMpUserInfor(WxMpUser wxMpUser) {
+		int rs1 = WxMpUserMapperImpl.queryCountByOpenId(wxMpUser);
+		if (rs1 > 0) {
+			int rs = WxMpUserMapperImpl.updateWxMpUser(wxMpUser);
+			System.out.println("二次关注成功：" + rs);
+		} else {
+			int rs = WxMpUserMapperImpl.insertWxMpUser(wxMpUser);
+			System.out.println("添加成功：" + rs);
 		}
-		return i;
 	}
 
 	/**
-	 * 取消关注
+	 * 用户取消关注
 	 * 
 	 * @param openId
-	 * @return
 	 */
-
-	public static int cancelAttention(WxMpUser wxMpUser) {
-		int i = wxMpUserMapper.cancelAttention(wxMpUser);
-		if (i > 0) {
-			session.commit();
-		}
-		return i;
+	public static void wxMpUserCancel(String openId) {
+		WxMpUser wxMpUser = new WxMpUser();
+		wxMpUser.setSubscribe(false);
+		wxMpUser.setOpenId(openId);
+		int rs = WxMpUserMapperImpl.cancelAttention(wxMpUser);
+		System.out.println("取消关注成功：" + rs);
 	}
 
-	/**
-	 * 查询是否关注
-	 * 
-	 * @param wxMpUser
-	 * @return
-	 */
-	public static int queryWxMpUserByOpenId(WxMpUser wxMpUser) {
-		WxMpUser user = wxMpUserMapper.queryWxMpUserByOpenId(wxMpUser);
-		if (user != null) {
-			return 1;
-		}
-		return 0;
-	}
-	
-	/**
-	 * 更新用户信息
-	 * @param wxMpUser
-	 * @return
-	 */
-	public static int updateWxMpUser(WxMpUser wxMpUser) {
-		int i = wxMpUserMapper.updateWxMpUser(wxMpUser);
-		if (i > 0) {
-			session.commit();
-		}
-		return i;
-	}
 }
