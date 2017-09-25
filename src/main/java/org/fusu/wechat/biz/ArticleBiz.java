@@ -27,7 +27,7 @@ public class ArticleBiz {
 			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
 			item.setTitle(alist.get(i).getTitle());
 			item.setPicUrl(alist.get(i).getPic_url());
-			item.setUrl(alist.get(i).getUrl());
+			item.setUrl("http://natapp.iceinto.com/ui/article/detail/"+alist.get(i).getArticleid());
 			articles.add(item);
 		}
 		return articles;
@@ -45,7 +45,7 @@ public class ArticleBiz {
 			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
 			item.setTitle(alist.get(i).getTitle());
 			item.setPicUrl(alist.get(i).getPic_url());
-			item.setUrl(alist.get(i).getUrl());
+			item.setUrl("http://natapp.iceinto.com/ui/article/detail/"+alist.get(i).getArticleid());
 			articles.add(item);
 		}
 		return articles;
@@ -63,7 +63,7 @@ public class ArticleBiz {
 			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
 			item.setTitle(alist.get(i).getTitle());
 			item.setPicUrl(alist.get(i).getPic_url());
-			item.setUrl(alist.get(i).getUrl());
+			item.setUrl("http://natapp.iceinto.com/ui/article/detail/"+alist.get(i).getArticleid());
 			articles.add(item);
 		}
 		return articles;

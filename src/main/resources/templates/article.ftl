@@ -11,7 +11,9 @@
         <!-- 使用 -->
      
         <a href="javascript:;" class="weui-btn weui-btn_primary">绿色按钮</a>
-        
         ${article.articleid}
+        ${article.title}
+                ${article.content}
+        
     </body>
 </html>
