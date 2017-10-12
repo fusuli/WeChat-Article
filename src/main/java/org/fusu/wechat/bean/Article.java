@@ -13,6 +13,8 @@ public class Article {
 	private String url;
 	private int pageview;
 	private int update_time;
+	private int fabulous;
+	private int tread;
 	private int host;
 
 	public int getArticleid() {
@@ -77,6 +79,22 @@ public class Article {
 
 	public void setHost(int host) {
 		this.host = host;
+	}
+
+	public int getFabulous() {
+		return fabulous;
+	}
+
+	public void setFabulous(int fabulous) {
+		this.fabulous = fabulous;
+	}
+
+	public int getTread() {
+		return tread;
+	}
+
+	public void setTread(int tread) {
+		this.tread = tread;
 	}
 
 }

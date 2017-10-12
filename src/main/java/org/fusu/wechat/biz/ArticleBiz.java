@@ -27,7 +27,7 @@ public class ArticleBiz {
 			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
 			item.setTitle(alist.get(i).getTitle());
 			item.setPicUrl(alist.get(i).getPic_url());
-			item.setUrl("http://natapp.iceinto.com/ui/article/detail/"+alist.get(i).getArticleid());
+			item.setUrl("http://natapp.iceinto.com/ui/article/detail/" + alist.get(i).getArticleid());
 			articles.add(item);
 		}
 		return articles;
@@ -45,35 +45,38 @@ public class ArticleBiz {
 			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
 			item.setTitle(alist.get(i).getTitle());
 			item.setPicUrl(alist.get(i).getPic_url());
-			item.setUrl("http://natapp.iceinto.com/ui/article/detail/"+alist.get(i).getArticleid());
+			item.setUrl("http://natapp.iceinto.com/ui/article/detail/" + alist.get(i).getArticleid());
 			articles.add(item);
 		}
 		return articles;
 	}
-	
+
 	/**
 	 * 根据用户输入的字段模糊查询
+	 * 
 	 * @param title
 	 * @return
 	 */
-	public static List<WxMpXmlOutNewsMessage.Item> likeArticle(String title){
+	public static List<WxMpXmlOutNewsMessage.Item> likeArticle(String title) {
 		List<WxMpXmlOutNewsMessage.Item> articles = new ArrayList<>();
 		List<Article> alist = ArticleMapperImpl.queryArticleByTitle(title);
 		for (int i = 0; i < alist.size(); i++) {
 			WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
 			item.setTitle(alist.get(i).getTitle());
 			item.setPicUrl(alist.get(i).getPic_url());
-			item.setUrl("http://natapp.iceinto.com/ui/article/detail/"+alist.get(i).getArticleid());
+			item.setUrl("http://natapp.iceinto.com/ui/article/detail/" + alist.get(i).getArticleid());
 			articles.add(item);
 		}
 		return articles;
 	}
+
 	/**
 	 * 根据articleid查询文章
+	 * 
 	 * @param articleid
 	 * @return
 	 */
-	public static Article queryArticleByArticleid(int articleid){
+	public static Article queryArticleByArticleid(int articleid) {
 		return ArticleMapperImpl.queryArticleByArticleid(articleid);
 	}
 }

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ArticleController {
 	@RequestMapping("/detail/{articleid}")
 	public String detail(@PathVariable("articleid") int articleid, Model model) {
-		System.out.println("获取："+articleid);
+		System.out.println("获取：" + articleid);
+		// HttpServletRequest request = null;
+		// String openid =(String) request.getAttribute("openid");
 		Article article = new Article();
-		article=ArticleBiz.queryArticleByArticleid(articleid);
+		article = ArticleBiz.queryArticleByArticleid(articleid);
 		model.addAttribute("article", article);
 		return "article";
 	}

@@ -23,7 +23,7 @@ public class MenuHandler extends AbstractHandler {
 	public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService weixinService,
 			WxSessionManager sessionManager) {
 		if (WxConsts.BUTTON_CLICK.equals(wxMessage.getEvent().toLowerCase())) {
-			// 处理关键字
+			// 处理关键字,判断按钮的值
 			if (StringUtils.equals(wxMessage.getEventKey(), "HOT")) {
 				return WxMpXmlOutMessage.NEWS().fromUser(wxMessage.getToUser()).toUser(wxMessage.getFromUser())
 						.articles(ArticleBiz.hotArticle()).build();
